@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
+using System.Data.OracleClient;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -22,7 +22,7 @@ namespace controlSSPE.Data
         public SSPEDbContext()
         {
             var connectionString = ConfigurationManager.ConnectionStrings[ConnectionStringName].ConnectionString;
-            _connection = new SqlConnection(connectionString);
+            _connection = new OracleConnection(connectionString);
             _connection.Open();
             _transaction = _connection.BeginTransaction(); 
         }
