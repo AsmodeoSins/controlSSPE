@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
-using System.Data.OracleClient;
+using Oracle.DataAccess.Client;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -15,9 +15,9 @@ namespace controlSSPE.Data
     public class SSPEDbContext : IDisposable, IDbContext
     {
         const string ConnectionStringName = "sspeTest";
-        private IDbConnection _connection;
+        private OracleConnection _connection;
         private bool _ownsConnection = true;
-        private IDbTransaction _transaction;
+        private OracleTransaction _transaction;
 
         public SSPEDbContext()
         {
@@ -27,7 +27,7 @@ namespace controlSSPE.Data
             _transaction = _connection.BeginTransaction(); 
         }
 
-        public IDbCommand CreateCommand()
+        public OracleCommand CreateCommand()
         {
             var command = _connection.CreateCommand();
             command.Transaction = _transaction;

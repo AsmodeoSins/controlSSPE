@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Oracle.DataAccess.Client;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace controlSSPE.Data.Repositories
 {
     public abstract class BaseRepository<TEntity>
     {
-        protected IEnumerable<TEntity> ToList(IDbCommand command)
+        protected IEnumerable<TEntity> ToList(OracleCommand command)
         {
             using (var reader = command.ExecuteReader())
             {
