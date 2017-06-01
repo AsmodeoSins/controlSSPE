@@ -1,0 +1,72 @@
+﻿using controlSSPE.Data.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Runtime.Remoting.Contexts;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace controlSSPE.Data
+{
+    public class SSPEDbContext : IDisposable, IDbContext
+    {
+        const string ConnectionStringName = "sspeTest";
+        private IDbConnection _connection;
+        private bool _ownsConnection = true;
+        private IDbTransaction _transaction;
+
+        public SSPEDbContext()
+        {
+            var connectionString = ConfigurationManager.ConnectionStrings[ConnectionStringName].ConnectionString;
+            _connection = new SqlConnection(connectionString);
+            _connection.Open();
+            _transaction = _connection.BeginTransaction(); 
+        }
+
+        public IDbCommand CreateCommand()
+        {
+            var command = _connection.CreateCommand();
+            command.Transaction = _transaction;
+            return command;
+        }
+
+        public void SaveChanges()
+        {
+            if (_transaction == null)
+            {
+                throw new InvalidOperationException();
+            }
+            _transaction.Commit();
+            _transaction = null;
+        }
+        public void Dispose()
+        {
+            if (_transaction != null)
+            {
+                _transaction.Rollback();
+                _transaction = null;
+            }
+            if (_connection != null && _ownsConnection)
+            {
+                _connection.Close();
+                _connection = null;
+            }
+        }
+    }
+    public static class CommandExtensions
+    {
+        public static void AddParameter(this IDbCommand command, string name, object value)
+        {
+            if (command == null) throw new ArgumentNullException("command");
+            if (name == null) throw new ArgumentNullException("name");
+            var p = command.CreateParameter();
+            p.ParameterName = name;
+            p.Value = value ?? DBNull.Value;
+            command.Parameters.Add(p);
+        }
+    }
+}
