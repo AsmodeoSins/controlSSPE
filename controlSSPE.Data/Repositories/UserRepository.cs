@@ -1,5 +1,6 @@
 ﻿using controlSSPE.Data.Interfaces;
 using controlSSPE.Entities;
+using Oracle.DataAccess.Client;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,13 +42,25 @@ namespace controlSSPE.Data.Repositories
             }
         }
 
-        protected override void Map(IDataRecord record, UserEntity entity)
+        protected override void Map(OracleDataReader record, UserEntity entity)
         {
-            entity.Id = (int)record["id"];
-            entity.Name = (string)record["Name"];
-            entity.LastName = (string)record["LastName"];
-            entity.Email = (string)record["Email"];
-            entity.Password = (string)record["Password"];
+            entity.Id = record.GetInt32(0);
+            if(!record.IsDBNull(1))
+            {
+                entity.Name = record.GetString(1);
+            }
+            if (!record.IsDBNull(2))
+            {
+                entity.LastName = record.GetString(2);
+            }
+            if (!record.IsDBNull(3))
+            {
+                entity.Email = record.GetString(3);
+            }
+            if (!record.IsDBNull(4))
+            {
+                entity.Password = record.GetString(4);
+            }
         }
 
         protected override UserEntity CreateEntity()

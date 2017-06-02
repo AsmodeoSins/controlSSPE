@@ -24,7 +24,7 @@ namespace controlSSPE.Data.Repositories
                 return items;
             }
         }
-        protected abstract void Map(IDataRecord record, TEntity entity);
+        protected abstract void Map(OracleDataReader record, TEntity entity);
         protected abstract TEntity CreateEntity();
     }
 }
