@@ -59,7 +59,7 @@ namespace controlSSPE.Data
     }
     public static class CommandExtensions
     {
-        public static void AddParameter(this IDbCommand command, string name, object value)
+        public static void AddParameter(this OracleCommand command, string name, object value)
         {
             if (command == null) throw new ArgumentNullException("command");
             if (name == null) throw new ArgumentNullException("name");

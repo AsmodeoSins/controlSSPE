@@ -23,7 +23,7 @@ namespace controlSSPE.Data.Repositories
         {
             using (var commandTable = _context.CreateCommand())
             {
-                commandTable.CommandText = "SELECT * FROM Users WHERE Id = @id";
+                commandTable.CommandText = "SELECT * FROM Users WHERE Id =:id";
                 commandTable.AddParameter("id", id);
                 return ToList(commandTable).FirstOrDefault();
             }
@@ -31,13 +31,17 @@ namespace controlSSPE.Data.Repositories
 
         public void SaveUser(UserEntity user)
         {
+            StringBuilder sbQuery;
             using (var commandTable = _context.CreateCommand())
             {
-                commandTable.CommandText = @"INSERT INTO Users (Name,LastName,Email,Password) VALUES(@name, @lastName, @password, @email)";
+
+                sbQuery = new StringBuilder("INSERT INTO Users (Id, Name,LastName,Email,Password) ")
+                    .Append(" VALUES(users_seq.nextval, :name, :lastName,  :email, :password)");
+                commandTable.CommandText = sbQuery.ToString();
                 commandTable.AddParameter("name", user.Name);
                 commandTable.AddParameter("lastName", user.LastName);
-                commandTable.AddParameter("password", user.Password);
                 commandTable.AddParameter("email", user.Email);
+                commandTable.AddParameter("password", user.Password);
                 commandTable.ExecuteNonQuery();
             }
         }
@@ -72,7 +76,7 @@ namespace controlSSPE.Data.Repositories
         {
             using (var commandTable = _context.CreateCommand())
             {
-                commandTable.CommandText = "SELECT * FROM Users WHERE Email = @email";
+                commandTable.CommandText = "SELECT * FROM Users WHERE Email = :email";
                 commandTable.AddParameter("email", email);
                 return ToList(commandTable).FirstOrDefault();
             }
