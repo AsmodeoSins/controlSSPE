@@ -7,8 +7,8 @@
     <ProjectGuid>{0EC01EF9-5571-41D5-AC19-C39107AF2398}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>controlSSPE.Data</RootNamespace>
-    <AssemblyName>controlSSPE.Data</AssemblyName>
+    <RootNamespace>controlSSPE.Datos</RootNamespace>
+    <AssemblyName>controlSSPE.Datos</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,19 +44,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IUserRepository.cs" />
-    <Compile Include="Repositories\BaseRepository.cs" />
-    <Compile Include="SSPEDbContext.cs" />
-    <Compile Include="Interfaces\IDbContext.cs" />
-    <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\IRepositorioUsuario.cs" />
+    <Compile Include="Repositorios\RepositorioBase.cs" />
+    <Compile Include="ContextoSSPEDb.cs" />
+    <Compile Include="Interfaces\ContextoIDb.cs" />
+    <Compile Include="Interfaces\IUnidadDeTrabajo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="UnitOfWork.cs" />
+    <Compile Include="Repositorios\RepositorioUsuario.cs" />
+    <Compile Include="UnidadDeTrabajo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\controlSSPE.Entities\controlSSPE.Entities.csproj">
+    <ProjectReference Include="..\controlSSPE.Entities\controlSSPE.Entidades.csproj">
       <Project>{26917069-602a-4dae-aa13-9cbe3e97e358}</Project>
-      <Name>controlSSPE.Entities</Name>
+      <Name>controlSSPE.Entidades</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

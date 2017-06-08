@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace controlSSPE.Data.Interfaces
+namespace controlSSPE.Datos.Interfaces
 {
-    public interface IUnitOfWork
+    public interface IUnidadDeTrabajo
     {
-        IUserRepository UserRepository { get; }
+        IRepositorioUsuario RepositorioUsuario { get; }
         void Commit();
         void Dispose();
     }

@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "controlSSPE.WinForms", "controlSSPE.WinForms\controlSSPE.WinForms.csproj", "{8325D33C-31D9-43BE-A08C-111BD8D02980}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "controlSSPE.Formas", "controlSSPE.WinForms\controlSSPE.Formas.csproj", "{8325D33C-31D9-43BE-A08C-111BD8D02980}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "controlSSPE.Business", "controlSSPE.Business\controlSSPE.Business.csproj", "{F440C4AF-A197-466B-9BBC-A9BA65E1E656}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "controlSSPE.Negocio", "controlSSPE.Business\controlSSPE.Negocio.csproj", "{F440C4AF-A197-466B-9BBC-A9BA65E1E656}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "controlSSPE.Data", "controlSSPE.Data\controlSSPE.Data.csproj", "{0EC01EF9-5571-41D5-AC19-C39107AF2398}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "controlSSPE.Datos", "controlSSPE.Data\controlSSPE.Datos.csproj", "{0EC01EF9-5571-41D5-AC19-C39107AF2398}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "controlSSPE.Entities", "controlSSPE.Entities\controlSSPE.Entities.csproj", "{26917069-602A-4DAE-AA13-9CBE3E97E358}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "controlSSPE.Entidades", "controlSSPE.Entities\controlSSPE.Entidades.csproj", "{26917069-602A-4DAE-AA13-9CBE3E97E358}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

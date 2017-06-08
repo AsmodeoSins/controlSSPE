@@ -6,22 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace controlSSPE.Data.Repositories
+namespace controlSSPE.Datos.Repositorios
 {
-    public abstract class BaseRepository<TEntity>
+    public abstract class RepositorioBase<TEntity>
     {
-        protected IEnumerable<TEntity> ToList(OracleCommand command)
+        protected IEnumerable<TEntity> ALista(OracleCommand command)
         {
             using (var reader = command.ExecuteReader())
             {
-                List<TEntity> items = new List<TEntity>();
+                List<TEntity> elementos = new List<TEntity>();
                 while (reader.Read())
                 {
-                    var item = CreateEntity();
-                    Map(reader, item);
-                    items.Add(item);
+                    var elemento = CreateEntity();
+                    Map(reader, elemento);
+                    elementos.Add(elemento);
                 }
-                return items;
+                return elementos;
             }
         }
         protected abstract void Map(OracleDataReader record, TEntity entity);
