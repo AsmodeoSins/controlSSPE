@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace controlSSPE.WinForms
+namespace controlSSPE.Formas
 {
     static class Program
     {
@@ -17,7 +17,7 @@ namespace controlSSPE.WinForms
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Application.Run(new Register());
+            Application.Run(new frmIniciaSesion());
 
         }
     }

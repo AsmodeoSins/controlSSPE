@@ -7,19 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using controlSSPE.Business;
-using controlSSPE.Entities;
+using controlSSPE.Negocio;
+using controlSSPE.Entidades;
 
-namespace controlSSPE.WinForms
+namespace controlSSPE.Formas
 {
-    public partial class Register : Form
+    public partial class frmRegitro : Form
     {
-        public Register()
+        public frmRegitro()
         {
             InitializeComponent();
         }
 
-        private void Register_Load(object sender, EventArgs e)
+        private void Registro_Load(object sender, EventArgs e)
         {
 
         }
@@ -36,13 +36,13 @@ namespace controlSSPE.WinForms
 
         private void btnOk_Click(object sender, EventArgs e)
         {
-            UserEntity user = new UserEntity();
+            EntidadUsuario user = new EntidadUsuario();
             user.Id = 5;
-            user.Name = txtName.Text;
-            user.LastName = txtLastName.Text;
-            user.Email = txtEmail.Text;
-            user.Password = txtPassword.Text;
-            new User().SignUp(user);
+            user.Nombre = txtName.Text;
+            user.Apellidos = txtLastName.Text;
+            user.Correo = txtEmail.Text;
+            user.Contraseña = txtPassword.Text;
+            new Usuarios().Registro(user);
         }
     }
 }

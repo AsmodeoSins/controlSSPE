@@ -1,5 +1,5 @@
-﻿using controlSSPE.Data.Interfaces;
-using controlSSPE.Entities;
+﻿using controlSSPE.Datos.Interfaces;
+using controlSSPE.Entidades;
 using Oracle.DataAccess.Client;
 using System;
 using System.Collections;
@@ -9,27 +9,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace controlSSPE.Data.Repositories
+namespace controlSSPE.Datos.Repositorios
 {
-    public class UserRepository : BaseRepository<UserEntity>, IUserRepository
+    public class RepositorioUsuario: RepositorioBase<EntidadUsuario>, IRepositorioUsuario
     {
-        private SSPEDbContext _context;
-        public UserRepository(SSPEDbContext context)
+        private ContextoSSPEDb _context;
+        public RepositorioUsuario(ContextoSSPEDb context)
         {
             _context = context;
         }
 
-        public UserEntity Get(int id)
+        public EntidadUsuario Obtener(int id)
         {
             using (var commandTable = _context.CreateCommand())
             {
                 commandTable.CommandText = "SELECT * FROM Users WHERE Id =:id";
                 commandTable.AddParameter("id", id);
-                return ToList(commandTable).FirstOrDefault();
+                return ALista(commandTable).FirstOrDefault();
             }
         }
 
-        public void SaveUser(UserEntity user)
+        public void GuardarUsuario(EntidadUsuario usuario)
         {
             StringBuilder sbQuery;
             using (var commandTable = _context.CreateCommand())
@@ -38,49 +38,51 @@ namespace controlSSPE.Data.Repositories
                 sbQuery = new StringBuilder("INSERT INTO Users (Id, Name,LastName,Email,Password) ")
                     .Append(" VALUES(users_seq.nextval, :name, :lastName,  :email, :password)");
                 commandTable.CommandText = sbQuery.ToString();
-                commandTable.AddParameter("name", user.Name);
-                commandTable.AddParameter("lastName", user.LastName);
-                commandTable.AddParameter("email", user.Email);
-                commandTable.AddParameter("password", user.Password);
+                commandTable.AddParameter("name", usuario.Nombre);
+                commandTable.AddParameter("lastName", usuario.Apellidos);
+                commandTable.AddParameter("email", usuario.Correo);
+                commandTable.AddParameter("password", usuario.Contraseña);
                 commandTable.ExecuteNonQuery();
             }
         }
 
-        protected override void Map(OracleDataReader record, UserEntity entity)
+        protected override void Map(OracleDataReader record, EntidadUsuario entidad)
         {
-            entity.Id = record.GetInt32(0);
+            entidad.Id = record.GetInt32(0);
             if(!record.IsDBNull(1))
             {
-                entity.Name = record.GetString(1);
+                entidad.Nombre = record.GetString(1);
             }
             if (!record.IsDBNull(2))
             {
-                entity.LastName = record.GetString(2);
+                entidad.Apellidos = record.GetString(2);
             }
             if (!record.IsDBNull(3))
             {
-                entity.Email = record.GetString(3);
+                entidad.Correo = record.GetString(3);
             }
             if (!record.IsDBNull(4))
             {
-                entity.Password = record.GetString(4);
+                entidad.Contraseña = record.GetString(4);
             }
         }
 
-        protected override UserEntity CreateEntity()
+        protected override EntidadUsuario CreateEntity()
         {
-            return new UserEntity();
+            return new EntidadUsuario();
         }
 
-        public UserEntity GetByEmail(string email)
+        public EntidadUsuario ObtenerPorCorreo(string email)
         {
             using (var commandTable = _context.CreateCommand())
             {
                 commandTable.CommandText = "SELECT * FROM Users WHERE Email = :email";
                 commandTable.AddParameter("email", email);
-                return ToList(commandTable).FirstOrDefault();
+                return ALista(commandTable).FirstOrDefault();
             }
         }
+
+        
     }
     
 }

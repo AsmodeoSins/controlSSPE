@@ -1,5 +1,5 @@
-﻿using controlSSPE.Data.Interfaces;
-using controlSSPE.Data.Repositories;
+﻿using controlSSPE.Datos.Interfaces;
+using controlSSPE.Datos.Repositorios;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,29 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace controlSSPE.Data
+namespace controlSSPE.Datos
 {
-    public class UnitOfWork : IUnitOfWork, IDisposable
+    public class UnidadDeTrabajo : IUnidadDeTrabajo, IDisposable
     {
-        private SSPEDbContext _context;
+        private ContextoSSPEDb _contexto;
         private bool disposedValue = false;
-        private IUserRepository _userRepository;
-        public IUserRepository UserRepository
+        private IRepositorioUsuario _repositorioUsuario;
+        public IRepositorioUsuario RepositorioUsuario
         {
             get
             {
-                return _userRepository = _userRepository ?? (_userRepository = new UserRepository(_context));
+                return _repositorioUsuario = _repositorioUsuario ?? (_repositorioUsuario = new RepositorioUsuario(_contexto));
             }
         }
 
-        public UnitOfWork(IDbContext context)
+        public UnidadDeTrabajo(ContextoIDb context)
         {
-            _context = (SSPEDbContext)context;
+            _contexto = (ContextoSSPEDb)context;
         }
 
         public void Commit()
         {
-            _context.SaveChanges();
+            _contexto.SaveChanges();
         }
         public void Dispose()
         {
@@ -42,7 +42,7 @@ namespace controlSSPE.Data
             {
                 if (disposing)
                 {
-                    _context.Dispose();
+                    _contexto.Dispose();
                 }
                 disposedValue = true;
             }

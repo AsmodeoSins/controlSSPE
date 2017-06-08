@@ -1,4 +1,4 @@
-﻿using controlSSPE.Data.Interfaces;
+﻿using controlSSPE.Datos.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,16 +10,16 @@ using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace controlSSPE.Data
+namespace controlSSPE.Datos
 {
-    public class SSPEDbContext : IDisposable, IDbContext
+    public class ContextoSSPEDb : IDisposable, ContextoIDb
     {
         const string ConnectionStringName = "sspeTest";
         private OracleConnection _connection;
         private bool _ownsConnection = true;
         private OracleTransaction _transaction;
 
-        public SSPEDbContext()
+        public ContextoSSPEDb()
         {
             var connectionString = ConfigurationManager.ConnectionStrings[ConnectionStringName].ConnectionString;
             _connection = new OracleConnection(connectionString);

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace controlSSPE.Data.Interfaces
+namespace controlSSPE.Datos.Interfaces
 {
-    public interface IDbContext
+    public interface ContextoIDb
     {
         void SaveChanges();
         void Dispose();
